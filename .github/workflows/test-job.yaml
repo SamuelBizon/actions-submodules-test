@@ -1,0 +1,24 @@
+name: Fetch Private Submodule
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  fetch_submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+
+      - name: List1
+        run: ls -la
+      
+      - name: Fetch changes from submodule
+        run: git submodule update --remote
+
+      - name: List2
+        run: ls -la
