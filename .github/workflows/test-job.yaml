@@ -15,10 +15,10 @@ jobs:
           token: ${{ secrets.PRIVATE_REPO_PAT }}
 
       - name: List1
-        run: ls -la
+        run: ls -la ./module-a
       
       - name: Fetch changes from submodule
         run: git submodule update --remote
 
       - name: List2
-        run: ls -la
+        run: ls -la ./module-a
