@@ -14,11 +14,26 @@ jobs:
           submodules: true
           token: ${{ secrets.PRIVATE_REPO_PAT }}
 
-      - name: List1
-        run: ls -la ./module-a
-      
       - name: Fetch changes from submodule
         run: git submodule update --remote
 
-      - name: List2
-        run: ls -la ./module-a
+      - name: Log in to Docker registry
+        run: |
+          echo "${{ secrets.REGISTRY_TOKEN }}" | docker login registry.digitalocean.com -u registry-token --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -t registry.digitalocean.com/testing-repo/test-image:v1 ./module-a/
+
+      - name: Push Docker image
+        run: |
+          docker push registry.digitalocean.com/testing-repo/test-image:v1
+
+      # - name: List1
+      #   run: ls -la ./module-a
+      
+      # - name: Fetch changes from submodule
+      #   run: git submodule update --remote
+
+      # - name: List2
+      #   run: ls -la ./module-a
