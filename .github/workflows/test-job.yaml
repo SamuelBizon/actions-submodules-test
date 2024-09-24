@@ -23,11 +23,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t registry.digitalocean.com/testing-repo/test-image:v1 ./module-a/
+          docker build -t registry.digitalocean.com/symetra-cr/test-image:v1 ./module-a/
 
       - name: Push Docker image
         run: |
-          docker push registry.digitalocean.com/testing-repo/test-image:v1
+          docker push registry.digitalocean.com/symetra-cr/test-image:v1
 
       # - name: List1
       #   run: ls -la ./module-a
